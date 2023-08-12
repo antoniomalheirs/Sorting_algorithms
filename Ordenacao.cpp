@@ -17,6 +17,19 @@ void measureSortingTime(void (*sortFunction)(T[], int), T arr[], int n, const st
     std::cout << sortName << " tempo: " << duration.count() << " segundos" << std::endl;
 }
 
+template <typename T>
+void measureSortingTime(void (*sortFunction)(T[], int, int), T arr[], int low, int high, const std::string& sortName) {
+    auto start = std::chrono::high_resolution_clock::now();
+
+    sortFunction(arr, low, high);
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration = end - start;
+
+    std::cout << std::fixed << std::setprecision(10);
+    std::cout << sortName << " tempo: " << duration.count() << " segundos" << std::endl;
+}
+
 void bubbleSort(int arr[], int n) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
@@ -54,6 +67,29 @@ void selectionSort(int arr[], int n) {
     }
 }
 
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            std::swap(arr[i], arr[j]);
+        }
+    }
+
+    std::swap(arr[i + 1], arr[high]);
+    return i + 1;
+}
+
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int partitionIndex = partition(arr, low, high);
+        quickSort(arr, low, partitionIndex - 1);
+        quickSort(arr, partitionIndex + 1, high);
+    }
+}
+
 
 int main() {
     int Ordenado[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -62,7 +98,6 @@ int main() {
 
     int n = sizeof(Ordenado) / sizeof(Ordenado[0]);
     
-
     // Medição do tempo para Bubble Sort
     std::cout << "Bubble Sort:" << std::endl;
     measureSortingTime(bubbleSort, Ordenado, n, "Array ordenado");
@@ -82,6 +117,13 @@ int main() {
     measureSortingTime(selectionSort, Ordenado, n, "Array ordenado");
     measureSortingTime(selectionSort, Parcial, n, "Array parcial");
     measureSortingTime(selectionSort, Randomico, n, "Array randomico");
+    std::cout << std::endl;
+
+    // Medição do tempo para Quick Sort
+    std::cout << "Quick Sort:" << std::endl;
+    measureSortingTime(quickSort, Ordenado, 0, n - 1, "Array ordenado");
+    measureSortingTime(quickSort, Parcial, 0, n - 1, "Array parcial");
+    measureSortingTime(quickSort, Randomico, 0, n - 1, "Array randomico");
     std::cout << std::endl;
 
     return 0;
