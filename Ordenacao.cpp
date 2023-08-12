@@ -142,6 +142,16 @@ int main() {
     int Randomico[] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
 
     int n = sizeof(Ordenado) / sizeof(Ordenado[0]);
+    const int n2 = 100;
+
+    int Ordenado2[n2];
+    int Parcial2[n2];
+    int Randomico2[n2];
+
+    for (int i = 0; i < n; i++) { Ordenado2[i] = i + 1; }
+    for (int i = 0; i < n / 2; i++) { Parcial2[i] = i + 1; }
+    for (int i = n / 2; i < n; i++) { Parcial2[i] = n - i; }
+    for (int i = 0; i < n; i++) { Randomico2[i] = n - i; }
     
     // Medição do tempo para Bubble Sort
     std::cout << "Bubble Sort:" << std::endl;
@@ -177,6 +187,43 @@ int main() {
     measureSortingTime(mergeSort, Parcial, 0, n - 1, "Array parcial");
     measureSortingTime(mergeSort, Randomico, 0, n - 1, "Array randomico");
     std::cout << std::endl;
+
+    std::cout << "/----------------------------------------------Vetores-com-100-posicoes------------------------------------------------/ " << std::endl;
+    std::cout << std::endl;
+
+    // Medição do tempo para Bubble Sort
+    std::cout << "Bubble Sort:" << std::endl;
+    measureSortingTime(bubbleSort, Ordenado2, n2, "Array ordenado");
+    measureSortingTime(bubbleSort, Parcial2, n2, "Array parcial");
+    measureSortingTime(bubbleSort, Randomico2, n2, "Array randomico");
+    std::cout << std::endl;
+
+    // Medição do tempo para Insertion Sort
+    std::cout << "Insertion Sort:" << std::endl;
+    measureSortingTime(insertionSort, Ordenado2, n2, "Array ordenado");
+    measureSortingTime(insertionSort, Parcial2, n2, "Array parcial");
+    measureSortingTime(insertionSort, Randomico2, n2, "Array randomico");
+    std::cout << std::endl;
+
+    // Medição do tempo para Selection Sort
+    std::cout << "Selection Sort:" << std::endl;
+    measureSortingTime(selectionSort, Ordenado2, n2, "Array ordenado");
+    measureSortingTime(selectionSort, Parcial2, n2, "Array parcial");
+    measureSortingTime(selectionSort, Randomico2, n2, "Array randomico");
+    std::cout << std::endl;
+
+    // Medição do tempo para Quick Sort
+    std::cout << "Quick Sort:" << std::endl;
+    measureSortingTime(quickSort, Ordenado2, 0, n2 - 1, "Array ordenado");
+    measureSortingTime(quickSort, Parcial2, 0, n2 - 1, "Array parcial");
+    measureSortingTime(quickSort, Randomico2, 0, n2 - 1, "Array randomico");
+    std::cout << std::endl;
+
+    // Medição do tempo para Merge Sort
+    std::cout << "Merge Sort:" << std::endl;
+    measureSortingTime(mergeSort, Ordenado2, 0, n2 - 1, "Array ordenado");
+    measureSortingTime(mergeSort, Parcial2, 0, n2 - 1, "Array parcial");
+    measureSortingTime(mergeSort, Randomico2, 0, n2 - 1, "Array randomico");
 
     return 0;
 }
