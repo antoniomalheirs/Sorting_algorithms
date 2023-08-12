@@ -90,6 +90,51 @@ void quickSort(int arr[], int low, int high) {
     }
 }
 
+void merge(int arr[], int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    int* L = new int[n1];
+    int* R = new int[n2];
+
+    for (int i = 0; i < n1; i++) {
+        L[i] = arr[left + i];
+    }
+    for (int j = 0; j < n2; j++) {
+        R[j] = arr[mid + 1 + j];
+    }
+
+    int x = 0, y = 0, k = left;
+    while (x < n1 && y < n2) {
+        if (L[x] <= R[y]) {
+            arr[k++] = L[x++];
+        }
+        else {
+            arr[k++] = R[y++];
+        }
+    }
+
+    while (x < n1) {
+        arr[k++] = L[x++];
+    }
+
+    while (y < n2) {
+        arr[k++] = R[y++];
+    }
+
+    delete[] L;
+    delete[] R;
+}
+
+void mergeSort(int arr[], int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
+    }
+}
+
 
 int main() {
     int Ordenado[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -124,6 +169,13 @@ int main() {
     measureSortingTime(quickSort, Ordenado, 0, n - 1, "Array ordenado");
     measureSortingTime(quickSort, Parcial, 0, n - 1, "Array parcial");
     measureSortingTime(quickSort, Randomico, 0, n - 1, "Array randomico");
+    std::cout << std::endl;
+
+    // Medição do tempo para Merge Sort
+    std::cout << "Merge Sort:" << std::endl;
+    measureSortingTime(mergeSort, Ordenado, 0, n - 1, "Array ordenado");
+    measureSortingTime(mergeSort, Parcial, 0, n - 1, "Array parcial");
+    measureSortingTime(mergeSort, Randomico, 0, n - 1, "Array randomico");
     std::cout << std::endl;
 
     return 0;
