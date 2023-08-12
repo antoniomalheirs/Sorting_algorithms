@@ -41,6 +41,20 @@ void insertionSort(int arr[], int n) {
     }
 }
 
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        std::swap(arr[i], arr[minIndex]);
+    }
+}
+
+
 int main() {
     int Ordenado[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     int Parcial[] = { 1, 2, 3, 4, 5, 10, 9, 8, 7, 6 };
@@ -63,7 +77,12 @@ int main() {
     measureSortingTime(insertionSort, Randomico, n, "Array randomico");
     std::cout << std::endl;
 
-    
+    // Medição do tempo para Selection Sort
+    std::cout << "Selection Sort:" << std::endl;
+    measureSortingTime(selectionSort, Ordenado, n, "Array ordenado");
+    measureSortingTime(selectionSort, Parcial, n, "Array parcial");
+    measureSortingTime(selectionSort, Randomico, n, "Array randomico");
+    std::cout << std::endl;
 
     return 0;
 }
