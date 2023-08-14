@@ -211,13 +211,13 @@ int main() {
     int Parcial2[n2];
     int Randomico2[n2];
 
-    int O4[n2];
-    int P4[n2];
-    int R4[n2];
     int O3[n];
     int P3[n];
     int R3[n];
-
+    int O4[n2];
+    int P4[n2];
+    int R4[n2];
+    
     for (int i = 0; i < n2; i++) { Ordenado2[i] = i + 1; }
     for (int i = 0; i < n2 / 2; i++) { Parcial2[i] = i + 1; }
     for (int i = n2 / 2; i < n2; i++) { Parcial2[i] = n2 - i; }
