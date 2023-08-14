@@ -204,7 +204,6 @@ int main() {
     int Ordenado[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     int Parcial[] = { 1, 2, 3, 4, 5, 10, 9, 8, 7, 6 };
     int Randomico[] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
-    int* men=0;
     const int n = sizeof(Ordenado) / sizeof(Ordenado[0]);
     const int n2 = 100;
 
